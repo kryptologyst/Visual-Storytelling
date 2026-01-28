@@ -1,0 +1,75 @@
+# Model configuration
+model:
+  vision_model_name: "google/vit-base-patch16-224"
+  text_model_name: "gpt2"
+  cross_attention_layers: 6
+  hidden_size: 768
+  num_attention_heads: 12
+  max_length: 150
+  num_beams: 5
+  temperature: 1.0
+  top_p: 0.9
+  top_k: 50
+  dropout: 0.1
+  attention_dropout: 0.1
+  device: "auto"
+  mixed_precision: true
+
+# Data configuration
+data:
+  data_dir: "data"
+  train_split: "train"
+  val_split: "val"
+  test_split: "test"
+  image_size: 224
+  normalize_mean: [0.485, 0.456, 0.406]
+  normalize_std: [0.229, 0.224, 0.225]
+  max_text_length: 150
+  tokenizer_name: "gpt2"
+  use_augmentation: true
+  augmentation_prob: 0.5
+  batch_size: 16
+  num_workers: 4
+  shuffle_train: true
+  dataset_name: "custom"
+
+# Training configuration
+training:
+  num_epochs: 10
+  learning_rate: 5e-5
+  weight_decay: 0.01
+  warmup_steps: 1000
+  max_grad_norm: 1.0
+  optimizer: "adamw"
+  scheduler: "cosine"
+  batch_size: 16
+  gradient_accumulation_steps: 1
+  use_amp: true
+  eval_steps: 500
+  save_steps: 1000
+  eval_strategy: "steps"
+  output_dir: "checkpoints"
+  save_total_limit: 3
+  load_best_model_at_end: true
+  metric_for_best_model: "overall_score"
+  greater_is_better: true
+  logging_steps: 100
+  logging_dir: "logs"
+  use_wandb: false
+  wandb_project: "visual-storytelling"
+  device: "auto"
+  seed: 42
+  deterministic: true
+
+# Evaluation configuration
+evaluation:
+  lowercase: true
+  remove_punctuation: false
+  remove_stopwords: false
+  bleu_weights: [0.25, 0.25, 0.25, 0.25]
+  bleu_smoothing: true
+  rouge_metrics: ["rouge1", "rouge2", "rougeL"]
+  bert_score_model: "bert-base-uncased"
+  bert_score_lang: "en"
+  compute_narrative_coherence: true
+  compute_visual_relevance: true

@@ -1,0 +1,31 @@
+# Demo configuration for visual storytelling
+demo:
+  model_path: "checkpoints/best_model.pt"
+  device: "auto"
+  max_length: 150
+  num_beams: 5
+  temperature: 1.0
+  top_p: 0.9
+  top_k: 50
+  show_attention: true
+  save_outputs: true
+  output_dir: "assets/demo_outputs"
+
+# Streamlit demo configuration
+streamlit:
+  title: "Visual Storytelling Demo"
+  description: "Generate compelling stories from images using advanced computer vision"
+  max_file_size: 200  # MB
+  supported_formats: ["jpg", "jpeg", "png", "bmp", "tiff"]
+  show_metrics: true
+  show_attention_maps: true
+  enable_download: true
+
+# Gradio demo configuration
+gradio:
+  title: "Visual Storytelling"
+  description: "Transform images into engaging narratives"
+  theme: "default"
+  allow_flagging: "never"
+  show_examples: true
+  examples_dir: "assets/examples"
